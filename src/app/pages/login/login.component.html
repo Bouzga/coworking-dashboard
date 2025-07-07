@@ -1,0 +1,35 @@
+<div class="login-wrapper">
+  <!-- PARTIE FORMULAIRE -->
+  <div class="login-left">
+    <mat-card class="login-card">
+      <div class="logo-container">
+        <img src="assets/images/logo.jpg" alt="Logo coworking" />
+        <h2>CoWorkSync</h2>
+      </div>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Email</mat-label>
+        <input matInput [(ngModel)]="email" type="email" />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="full-width">
+        <mat-label>Mot de passe</mat-label>
+        <input matInput [(ngModel)]="password" type="password" />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="full-width" (click)="onLogin()">
+        Se connecter
+      </button>
+
+      <button mat-stroked-button class="full-width" (click)="onGuestVisit()">
+        Continuer en tant qu’invité
+      </button>
+
+    </mat-card>
+  </div>
+
+  <!-- PARTIE IMAGE -->
+  <div class="login-right">
+    <img src="assets/images/first-page.jpg" alt="Illustration coworking" />
+  </div>
+</div>

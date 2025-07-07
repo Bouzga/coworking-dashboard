@@ -1,0 +1,102 @@
+<div class="guest-wrapper">
+    <!-- NAVBAR -->
+    <header class="guest-header">
+        <div class="logo-section">
+            <img src="assets/images/logo.jpg" alt="Logo" />
+            <span class="brand">CoWorkSync</span>
+        </div>
+
+        <nav class="guest-nav">
+            <a routerLink="/guest/reservation">Réserver</a>
+            <a routerLink="/guest/espace">Espace Coworking</a>
+            <a routerLink="/guest/solutions">Solutions</a>
+            <a routerLink="/guest/tarifs">Tarifs</a>
+            <a routerLink="/guest/contact">Contact</a>
+        </nav>
+
+        <nav class="mobile-nav" *ngIf="isMobileMenuOpen">
+            <a routerLink="/guest/reservation">Réserver</a>
+            <a routerLink="/guest/espace">Espace Coworking</a>
+            <a routerLink="/guest/solutions">Solutions</a>
+            <a routerLink="/guest/tarifs">Tarifs</a>
+            <a routerLink="/guest/contact">Contact</a>
+        </nav>
+
+        
+        <div class="guest-profile">
+            <mat-icon>person</mat-icon>
+        </div>
+
+        <div class="guest-burger" (click)="toggleMobileMenu()">
+            <mat-icon>menu</mat-icon>
+        </div>
+
+    </header>
+
+    <section class="hero-section" [ngStyle]="{ 'background-image': 'url(' + heroSlides[currentSlide].image + ')' }">
+        <div class="hero-overlay">
+            <h1><span> {{ heroSlides[currentSlide].title.split(' ')[0] }} </span> {{
+                heroSlides[currentSlide].title.split(' ').slice(1).join(' ') }}</h1>
+            <p>{{ heroSlides[currentSlide].subtitle }}</p>
+            <!-- Boutons -->
+            <div class="hero-buttons">
+                <button mat-raised-button color="primary" class="hero-button" (click)="onReserve()">Réserver
+                    Maintenant</button>
+                <button mat-raised-button color="accent" class="hero-button" (click)="tarif()">Tarif</button>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="reservation-section" class="reservation-wrapper">
+        <h2 class="reservation-title">
+            <span>Commencez votre</span> Expérience Coworking
+        </h2>
+
+        <div class="reservation-card">
+            <div class="stepper">
+                <div class="step" [class.active]="stepIndex >= 0">1. Choix</div>
+                <div class="step" [class.active]="stepIndex >= 1">2. Horaire</div>
+                <div class="step" [class.active]="stepIndex >= 2">3. Détails</div>
+                <div class="step" [class.active]="stepIndex >= 3">4. Paiement</div>
+                <div class="step" [class.active]="stepIndex >= 4">5. Confirmation</div>
+            </div>
+
+
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="adhesion">Formule</label>
+                    <select id="adhesion">
+                        <option value="" disabled selected>Choisissez une formule</option>
+                        <option value="1h">1 heure</option>
+                        <option value="demi-journee">Demi-journée</option>
+                        <option value="journee">Journée</option>
+                        <option value="hebdo">Hebdomadaire</option>
+                        <option value="mensuel">Mensuel</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="offre">Durée</label>
+                    <select id="offre">
+                        <option value="" disabled selected>Choisissez votre durée</option>
+                        <option value="1h">1 heure</option>
+                        <option value="2h">2 heures</option>
+                        <option value="3h">3 heures</option>
+                        <option value="4h">4 heures</option>
+                        <option value="journee">Journée complète</option>
+                    </select>
+                </div>
+                <div class="button-wrapper">
+                    <button mat-raised-button class="next-button" (click)="nextStep()">SUIVANT</button>
+
+                </div>
+            </div>
+
+
+
+
+
+
+
+        </div>
