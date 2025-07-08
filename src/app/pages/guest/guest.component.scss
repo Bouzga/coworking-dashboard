@@ -349,3 +349,46 @@ select:focus {
     padding-left: 1rem;
   }
 }
+::ng-deep .mat-calendar {
+  max-width: 300px;
+  background-color: #b762b5; // jaune
+  border-radius: 8px;
+  padding: 1rem;
+  font-family: 'Segoe UI', sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+::ng-deep .mat-calendar-header {
+  background-color: #b762b5;
+  color: #b762b5;
+  font-weight: bold;
+}
+
+::ng-deep .mat-calendar-table-header th {
+  color: #b762b5;
+}
+
+::ng-deep .mat-calendar-body-cell-content {
+  background: white;
+  border-radius: 50%;
+  color: #b762b5;
+  font-weight: 500;
+  width: 32px;
+  height: 32px;
+  line-height: 32px;
+  margin: auto;
+  transition: background-color 0.2s;
+}
+
+::ng-deep .mat-calendar-body-selected .mat-calendar-body-cell-content {
+  background-color: #b762b5 !important;
+  color: #212121 !important;
+}
+
+::ng-deep .mat-calendar-body-today .mat-calendar-body-cell-content {
+  border: 2px solid #b762b5;
+}
+
+::ng-deep .mat-calendar-arrow {
+  color: #b762b5;
+}

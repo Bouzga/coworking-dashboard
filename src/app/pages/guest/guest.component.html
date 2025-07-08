@@ -54,49 +54,86 @@
         </h2>
 
         <div class="reservation-card">
-            <div class="stepper">
-                <div class="step" [class.active]="stepIndex >= 0">1. Choix</div>
-                <div class="step" [class.active]="stepIndex >= 1">2. Horaire</div>
-                <div class="step" [class.active]="stepIndex >= 2">3. Détails</div>
-                <div class="step" [class.active]="stepIndex >= 3">4. Paiement</div>
-                <div class="step" [class.active]="stepIndex >= 4">5. Confirmation</div>
-            </div>
+  <!-- Stepper -->
+  <div class="stepper">
+    <div class="step" [class.active]="stepIndex >= 0">1. Choix</div>
+    <div class="step" [class.active]="stepIndex >= 1">2. Horaire</div>
+    <div class="step" [class.active]="stepIndex >= 2">3. Détails</div>
+    <div class="step" [class.active]="stepIndex >= 3">4. Paiement</div>
+    <div class="step" [class.active]="stepIndex >= 4">5. Confirmation</div>
+  </div>
+
+  <!-- ÉTAPE 1 : CHOIX -->
+  <div *ngIf="stepIndex === 0" class="form-row">
+    <div class="form-group">
+      <label for="adhesion">Formule</label>
+      <select id="adhesion" [(ngModel)]="selectedFormule">
+        <option value="" disabled>Choisissez une formule</option>
+        <option value="1h">1 heure</option>
+        <option value="demi-journee">Demi-journée</option>
+        <option value="journee">Journée</option>
+        <option value="hebdo">Hebdomadaire</option>
+        <option value="mensuel">Mensuel</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="offre">Durée</label>
+      <select id="offre" [(ngModel)]="selectedDuree">
+        <option value="" disabled>Choisissez votre durée</option>
+        <option value="1h">1 heure</option>
+        <option value="2h">2 heures</option>
+        <option value="3h">3 heures</option>
+        <option value="4h">4 heures</option>
+        <option value="journee">Journée complète</option>
+      </select>
+    </div>
+
+    <div class="button-wrapper">
+      <button mat-raised-button class="next-button" (click)="nextStep()" [disabled]="!selectedFormule || !selectedDuree">
+        SUIVANT
+      </button>
+    </div>
+  </div>
+
+  <!-- ÉTAPE 2 : HORAIRE -->
+  <div *ngIf="stepIndex === 1" class="form-row">
+    <p class="info-text">
+      Ci-dessous vous trouverez une liste de créneaux disponibles pour
+      <strong>Espace partagé</strong>. Cliquez sur un créneau pour continuer la réservation.
+    </p>
+
+    <div class="horaire-container">
+      <mat-calendar
+  [(selected)]="selectedDate"
+  [startAt]="today"
+  startView="month"
+  (monthSelected)="selectedDate = $event"
+  (yearSelected)="$event.stopPropagation()"
+></mat-calendar>
+
+      <div class="horaire-list">
+        <label *ngFor="let horaire of horaires">
+          <input type="radio" name="horaire" [value]="horaire" /> {{ horaire }}
+        </label>
+      </div>
+    </div>
+
+    <p *ngIf="!selectedDate" style="color: red; text-align: center; margin-top: 10px;">
+  Veuillez sélectionner une date pour continuer.
+</p>
 
 
-            <div class="form-row">
-                <div class="form-group">
-                    <label for="adhesion">Formule</label>
-                    <select id="adhesion">
-                        <option value="" disabled selected>Choisissez une formule</option>
-                        <option value="1h">1 heure</option>
-                        <option value="demi-journee">Demi-journée</option>
-                        <option value="journee">Journée</option>
-                        <option value="hebdo">Hebdomadaire</option>
-                        <option value="mensuel">Mensuel</option>
-                    </select>
-                </div>
+   <div class="button-wrapper">
+  <button 
+    mat-raised-button 
+    class="next-button" 
+    (click)="nextStep()" 
+    [disabled]="!selectedDate"
+  >
+    SUIVANT
+  </button>
+</div>
 
-                <div class="form-group">
-                    <label for="offre">Durée</label>
-                    <select id="offre">
-                        <option value="" disabled selected>Choisissez votre durée</option>
-                        <option value="1h">1 heure</option>
-                        <option value="2h">2 heures</option>
-                        <option value="3h">3 heures</option>
-                        <option value="4h">4 heures</option>
-                        <option value="journee">Journée complète</option>
-                    </select>
-                </div>
-                <div class="button-wrapper">
-                    <button mat-raised-button class="next-button" (click)="nextStep()">SUIVANT</button>
-
-                </div>
-            </div>
-
-
-
-
-
-
-
-        </div>
+  </div>
+</div>
