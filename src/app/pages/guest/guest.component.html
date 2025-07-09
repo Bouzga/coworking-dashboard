@@ -1,139 +1,137 @@
 <div class="guest-wrapper">
-    <!-- NAVBAR -->
-    <header class="guest-header">
-        <div class="logo-section">
-            <img src="assets/images/logo.jpg" alt="Logo" />
-            <span class="brand">CoWorkSync</span>
-        </div>
-
-        <nav class="guest-nav">
-            <a routerLink="/guest/reservation">Réserver</a>
-            <a routerLink="/guest/espace">Espace Coworking</a>
-            <a routerLink="/guest/solutions">Solutions</a>
-            <a routerLink="/guest/tarifs">Tarifs</a>
-            <a routerLink="/guest/contact">Contact</a>
-        </nav>
-
-        <nav class="mobile-nav" *ngIf="isMobileMenuOpen">
-            <a routerLink="/guest/reservation">Réserver</a>
-            <a routerLink="/guest/espace">Espace Coworking</a>
-            <a routerLink="/guest/solutions">Solutions</a>
-            <a routerLink="/guest/tarifs">Tarifs</a>
-            <a routerLink="/guest/contact">Contact</a>
-        </nav>
-
-        
-        <div class="guest-profile">
-            <mat-icon>person</mat-icon>
-        </div>
-
-        <div class="guest-burger" (click)="toggleMobileMenu()">
-            <mat-icon>menu</mat-icon>
-        </div>
-
-    </header>
-
-    <section class="hero-section" [ngStyle]="{ 'background-image': 'url(' + heroSlides[currentSlide].image + ')' }">
-        <div class="hero-overlay">
-            <h1><span> {{ heroSlides[currentSlide].title.split(' ')[0] }} </span> {{
-                heroSlides[currentSlide].title.split(' ').slice(1).join(' ') }}</h1>
-            <p>{{ heroSlides[currentSlide].subtitle }}</p>
-            <!-- Boutons -->
-            <div class="hero-buttons">
-                <button mat-raised-button color="primary" class="hero-button" (click)="onReserve()">Réserver
-                    Maintenant</button>
-                <button mat-raised-button color="accent" class="hero-button" (click)="tarif()">Tarif</button>
-            </div>
-
-        </div>
-    </section>
-
-    <section id="reservation-section" class="reservation-wrapper">
-        <h2 class="reservation-title">
-            <span>Commencez votre</span> Expérience Coworking
-        </h2>
-
-        <div class="reservation-card">
-  <!-- Stepper -->
-  <div class="stepper">
-    <div class="step" [class.active]="stepIndex >= 0">1. Choix</div>
-    <div class="step" [class.active]="stepIndex >= 1">2. Horaire</div>
-    <div class="step" [class.active]="stepIndex >= 2">3. Détails</div>
-    <div class="step" [class.active]="stepIndex >= 3">4. Paiement</div>
-    <div class="step" [class.active]="stepIndex >= 4">5. Confirmation</div>
-  </div>
-
-  <!-- ÉTAPE 1 : CHOIX -->
-  <div *ngIf="stepIndex === 0" class="form-row">
-    <div class="form-group">
-      <label for="adhesion">Formule</label>
-      <select id="adhesion" [(ngModel)]="selectedFormule">
-        <option value="" disabled>Choisissez une formule</option>
-        <option value="1h">1 heure</option>
-        <option value="demi-journee">Demi-journée</option>
-        <option value="journee">Journée</option>
-        <option value="hebdo">Hebdomadaire</option>
-        <option value="mensuel">Mensuel</option>
-      </select>
+  <!-- NAVBAR -->
+  <header class="guest-header">
+    <div class="logo-section">
+      <img src="assets/images/logo.jpg" alt="Logo" />
+      <span class="brand">CoWorkSync</span>
     </div>
 
-    <div class="form-group">
-      <label for="offre">Durée</label>
-      <select id="offre" [(ngModel)]="selectedDuree">
-        <option value="" disabled>Choisissez votre durée</option>
-        <option value="1h">1 heure</option>
-        <option value="2h">2 heures</option>
-        <option value="3h">3 heures</option>
-        <option value="4h">4 heures</option>
-        <option value="journee">Journée complète</option>
-      </select>
+    <nav class="guest-nav">
+      <a routerLink="/guest/reservation">Réserver</a>
+      <a routerLink="/guest/espace">Espace Coworking</a>
+      <a routerLink="/guest/solutions">Solutions</a>
+      <a routerLink="/guest/tarifs">Tarifs</a>
+      <a routerLink="/guest/contact">Contact</a>
+    </nav>
+
+    <nav class="mobile-nav" *ngIf="isMobileMenuOpen">
+      <a routerLink="/guest/reservation">Réserver</a>
+      <a routerLink="/guest/espace">Espace Coworking</a>
+      <a routerLink="/guest/solutions">Solutions</a>
+      <a routerLink="/guest/tarifs">Tarifs</a>
+      <a routerLink="/guest/contact">Contact</a>
+    </nav>
+
+
+    <div class="guest-profile">
+      <mat-icon>person</mat-icon>
     </div>
 
-    <div class="button-wrapper">
-      <button mat-raised-button class="next-button" (click)="nextStep()" [disabled]="!selectedFormule || !selectedDuree">
-        SUIVANT
-      </button>
+    <div class="guest-burger" (click)="toggleMobileMenu()">
+      <mat-icon>menu</mat-icon>
     </div>
-  </div>
 
-  <!-- ÉTAPE 2 : HORAIRE -->
-  <div *ngIf="stepIndex === 1" class="form-row">
-    <p class="info-text">
-      Ci-dessous vous trouverez une liste de créneaux disponibles pour
-      <strong>Espace partagé</strong>. Cliquez sur un créneau pour continuer la réservation.
-    </p>
+  </header>
 
-    <div class="horaire-container">
-      <mat-calendar
-  [(selected)]="selectedDate"
-  [startAt]="today"
-  startView="month"
-  (monthSelected)="selectedDate = $event"
-  (yearSelected)="$event.stopPropagation()"
-></mat-calendar>
-
-      <div class="horaire-list">
-        <label *ngFor="let horaire of horaires">
-          <input type="radio" name="horaire" [value]="horaire" /> {{ horaire }}
-        </label>
+  <section class="hero-section" [ngStyle]="{ 'background-image': 'url(' + heroSlides[currentSlide].image + ')' }">
+    <div class="hero-overlay">
+      <h1><span> {{ heroSlides[currentSlide].title.split(' ')[0] }} </span> {{
+        heroSlides[currentSlide].title.split(' ').slice(1).join(' ') }}</h1>
+      <p>{{ heroSlides[currentSlide].subtitle }}</p>
+      <!-- Boutons -->
+      <div class="hero-buttons">
+        <button mat-raised-button color="primary" class="hero-button" (click)="onReserve()">Réserver
+          Maintenant</button>
+        <button mat-raised-button color="accent" class="hero-button" (click)="tarif()">Tarif</button>
       </div>
+
     </div>
+  </section>
 
-    <p *ngIf="!selectedDate" style="color: red; text-align: center; margin-top: 10px;">
-  Veuillez sélectionner une date pour continuer.
-</p>
+  <section id="reservation-section" class="reservation-wrapper">
+    <h2 class="reservation-title">
+      <span>Commencez votre</span> Expérience Coworking
+    </h2>
+
+    <div class="reservation-card">
+      <!-- Stepper -->
+      <div class="stepper">
+        <div class="step" [class.active]="stepIndex >= 0">1. Choix</div>
+        <div class="step" [class.active]="stepIndex >= 1">2. Horaire</div>
+        <div class="step" [class.active]="stepIndex >= 2">3. Détails</div>
+        <div class="step" [class.active]="stepIndex >= 3">4. Paiement</div>
+        <div class="step" [class.active]="stepIndex >= 4">5. Confirmation</div>
+      </div>
+
+      <!-- ÉTAPE 1 : CHOIX -->
+      <div *ngIf="stepIndex === 0" class="form-row">
+        <div class="form-group">
+          <label for="adhesion">Formule</label>
+          <select id="adhesion" [(ngModel)]="selectedFormule">
+            <option value="" disabled>Choisissez une formule</option>
+            <option value="1h">1 heure</option>
+            <option value="demi-journee">Demi-journée</option>
+            <option value="journee">Journée</option>
+            <option value="hebdo">Hebdomadaire</option>
+            <option value="mensuel">Mensuel</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="offre">Durée</label>
+          <select id="offre" [(ngModel)]="selectedDuree">
+            <option value="" disabled>Choisissez votre durée</option>
+            <option value="1h">1 heure</option>
+            <option value="2h">2 heures</option>
+            <option value="3h">3 heures</option>
+            <option value="4h">4 heures</option>
+            <option value="journee">Journée complète</option>
+          </select>
+        </div>
+
+        <div class="button-wrapper">
+          <button mat-raised-button class="next-button" (click)="nextStep()"
+            [disabled]="!selectedFormule || !selectedDuree">
+            SUIVANT
+          </button>
+        </div>
+      </div>
+
+      <!-- ÉTAPE 2 : HORAIRE -->
+      <!-- ÉTAPE 2 : HORAIRE -->
+      <div *ngIf="stepIndex === 1" class="horaire-section">
+        <p class="info-text">
+          Ci-dessous vous trouverez une liste de créneaux disponibles pour
+          <strong>Espace partagé</strong> chez <strong>Choisir votre poste de travail</strong>.
+          Cliquez sur un créneau pour continuer la réservation.
+        </p>
+
+        <div class="calendar-wrapper">
+    <mat-calendar
+  [selected]="selectedDate"
+  [startAt]="today"
+  (selectedChange)="onDateSelected($event)"
+  [dateClass]="getDateClass">
+</mat-calendar>
 
 
-   <div class="button-wrapper">
-  <button 
-    mat-raised-button 
-    class="next-button" 
-    (click)="nextStep()" 
-    [disabled]="!selectedDate"
-  >
-    SUIVANT
-  </button>
-</div>
 
-  </div>
-</div>
+
+        </div>
+
+        <div class="horaire-list">
+          <label class="horaire-item" *ngFor="let horaire of horaires">
+            <input type="radio" name="horaire" [value]="horaire" />
+            {{ horaire }}
+          </label>
+        </div>
+
+        <div class="button-wrapper">
+          <button mat-raised-button class="next-button" (click)="nextStep()" [disabled]="!selectedDate">
+            SUIVANT
+          </button>
+        </div>
+      </div>
+
+
+    </div>
