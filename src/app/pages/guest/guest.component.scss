@@ -400,9 +400,37 @@ select:focus {
 .horaire-section {
   padding: 2rem 1rem;
 
+  .horaire-container {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .horaire-container {
+      flex-direction: column;
+      align-items: center;
+    }
+  }
+
   .calendar-wrapper {
+    flex: 1 1 300px;
     max-width: 350px;
-    margin: 0 auto 2rem;
+  }
+
+  .horaire-list {
+    flex: 1 1 300px;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+
+    .horaire-item {
+      font-weight: 500;
+      color: #0d47a1;
+    }
   }
 
   mat-form-field {
@@ -442,13 +470,73 @@ select:focus {
 ::ng-deep .mat-calendar-body-today:not(.mat-calendar-body-selected) .mat-calendar-body-cell-content {
   border: none !important;
 }
+
 ::ng-deep .mat-calendar-body-selected .mat-calendar-body-cell-content {
-  background: #0d47a1 !important;   // bleu foncé
+  background: #0d47a1 !important; // bleu foncé
   color: #fff !important;
 }
 
 ::ng-deep .custom-selected-date .mat-calendar-body-cell-content {
-  background: #ffca28 !important;   // jaune
+  background: #ffca28 !important; // jaune
   color: #0d47a1 !important;
   font-weight: 700;
+}
+/* Section globale */
+.reservation-details-section {
+  padding: 2rem;
+  background-color: #fafafa;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.05);
+}
+
+/* Paragraphe résumé */
+.reservation-summary {
+  font-size: 1.1rem;
+  color: #333;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+/* Formulaire */
+.details-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-group.full-width {
+  grid-column: span 2;
+}
+
+label {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: #333;
+}
+
+.input-field, .textarea-field {
+  padding: 0.75rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+  background-color: white;
+}
+
+.input-field:focus, .textarea-field:focus {
+  border-color: #3f51b5;
+  outline: none;
+}
+
+/* Boutons */
+.button-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
 }

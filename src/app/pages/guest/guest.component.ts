@@ -1,18 +1,33 @@
 import { Component, LOCALE_ID } from '@angular/core';
-import { CommonModule } from '@angular/common'; // ✅ à importer
-import { MatIcon } from '@angular/material/icon';
+import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
+/* Angular Material 19 – stand-alone API */
+import { MatCalendar } from '@angular/material/datepicker'; // ✅
+import { MatDatepickerModule } from '@angular/material/datepicker'; // seulement si tu utilises <mat-datepicker>
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
-import { MatCalendarModule } from '@angular/material/datepicker';
+
 @Component({
   selector: 'app-guest',
   standalone: true,
-  imports: [CommonModule, MatIcon, FormsModule, MatDatepickerModule, MatNativeDateModule, MatFormFieldModule, MatInputModule, MatDatepickerModule, MatNativeDateModule, MatIconModule, MatButtonModule, CommonModule, FormsModule, MatCalendarModule, MatNativeDateModule, MatButtonModule,],
+  imports: [
+    /* Angular */
+    CommonModule,
+    FormsModule,
+
+    /* Material */
+    MatCalendar,            // <mat-calendar>
+    MatDatepickerModule,    // si tu as <mat-datepicker> ailleurs
+    MatNativeDateModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatButtonModule
+  ],
   templateUrl: './guest.component.html',
   styleUrl: './guest.component.scss',
   providers: [{ provide: LOCALE_ID, useValue: 'fr-FR' }]
@@ -34,6 +49,12 @@ export class GuestComponent {
     '16h00', '16h30', '17h00', '17h30'
   ];
 
+  userDetails = {
+    nom: '',
+    telephone: '',
+    email: '',
+    notes: ''
+  };
 
   ngOnInit() {
     setInterval(() => {
@@ -51,9 +72,6 @@ export class GuestComponent {
       ? 'custom-selected-date'
       : '';
   }
-
-
-
 
   heroSlides = [
     {
@@ -95,18 +113,26 @@ export class GuestComponent {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }
 
-  onDateSelected(date: Date) {
-  this.selectedDate = date;             // pas de clone !
-  console.log('Date sélectionnée :', this.selectedDate);
-}
+  onDateSelected(date: Date | null): void {
+    if (date) {
+      this.selectedDate = date;
+      console.log('Date sélectionnée :', this.selectedDate);
+    }
+  }
 
-getDateClass = (d: Date): string => {
-  return this.selectedDate &&
-         d.getDate()   === this.selectedDate.getDate() &&
-         d.getMonth()  === this.selectedDate.getMonth() &&
-         d.getFullYear() === this.selectedDate.getFullYear()
-           ? 'custom-selected-date'
-           : '';
-};
+  getDateClass = (d: Date): string => {
+    return this.selectedDate &&
+      d.getDate() === this.selectedDate.getDate() &&
+      d.getMonth() === this.selectedDate.getMonth() &&
+      d.getFullYear() === this.selectedDate.getFullYear()
+      ? 'custom-selected-date'
+      : '';
+  };
+
+  previousStep(): void {
+    if (this.stepIndex > 0) {
+      this.stepIndex--;
+    }
+  }
 
 }

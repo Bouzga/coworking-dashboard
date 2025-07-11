@@ -98,7 +98,6 @@
       </div>
 
       <!-- ÉTAPE 2 : HORAIRE -->
-      <!-- ÉTAPE 2 : HORAIRE -->
       <div *ngIf="stepIndex === 1" class="horaire-section">
         <p class="info-text">
           Ci-dessous vous trouverez une liste de créneaux disponibles pour
@@ -106,28 +105,70 @@
           Cliquez sur un créneau pour continuer la réservation.
         </p>
 
-        <div class="calendar-wrapper">
-    <mat-calendar
-  [selected]="selectedDate"
-  [startAt]="today"
-  (selectedChange)="onDateSelected($event)"
-  [dateClass]="getDateClass">
-</mat-calendar>
+        <div class="horaire-container">
+          <div class="calendar-wrapper">
+            <mat-calendar [selected]="selectedDate" [startAt]="today" (selectedChange)="onDateSelected($event)"
+              [dateClass]="getDateClass">
+            </mat-calendar>
+          </div>
 
-
-
-
+          <div class="horaire-list">
+            <label class="horaire-item" *ngFor="let horaire of horaires">
+              <input type="radio" name="horaire" [value]="horaire" />
+              {{ horaire }}
+            </label>
+          </div>
         </div>
 
-        <div class="horaire-list">
-          <label class="horaire-item" *ngFor="let horaire of horaires">
-            <input type="radio" name="horaire" [value]="horaire" />
-            {{ horaire }}
-          </label>
-        </div>
 
         <div class="button-wrapper">
+          <button mat-stroked-button color="primary" (click)="previousStep()">
+            RETOUR
+          </button>
           <button mat-raised-button class="next-button" (click)="nextStep()" [disabled]="!selectedDate">
+            SUIVANT
+          </button>
+        </div>
+      </div>
+
+      <!-- ÉTAPE 3 : DÉTAILS -->
+      <div *ngIf="stepIndex === 2" class="reservation-details-section">
+        <p class="reservation-summary">
+          Vous avez choisi de réserver un poste de travail dans l’<strong>Espace partagé</strong> le
+          <strong>{{ selectedDate | date: 'dd MMMM yyyy' }}</strong>. Le prix est <strong>$20.00</strong>.<br />
+          Veuillez remplir vos coordonnées dans le formulaire ci-dessous pour continuer la réservation.
+        </p>
+
+        <div class="details-form">
+          <div class="form-group">
+            <label for="nom">Nom complet</label>
+            <input id="nom" type="text" [(ngModel)]="userDetails.nom" placeholder="Entrez votre nom complet"
+              class="input-field" />
+          </div>
+
+          <div class="form-group">
+            <label for="tel">Téléphone</label>
+            <input id="tel" type="tel" [(ngModel)]="userDetails.telephone" placeholder="+212 650-123456"
+              class="input-field" />
+          </div>
+
+          <div class="form-group">
+            <label for="email">E-mail</label>
+            <input id="email" type="email" [(ngModel)]="userDetails.email" placeholder="exemple@domaine.com"
+              class="input-field" />
+          </div>
+
+          <div class="form-group full-width">
+            <label for="notes">Notes</label>
+            <textarea id="notes" rows="4" [(ngModel)]="userDetails.notes" placeholder="Notes supplémentaires..."
+              class="textarea-field"></textarea>
+          </div>
+        </div>
+
+        <div class="button-actions">
+          <button mat-stroked-button color="primary" (click)="previousStep()">RETOUR</button>
+          <button mat-raised-button color="primary" (click)="nextStep()"
+            [disabled]="!userDetails.nom || !userDetails.telephone || !userDetails.email">
             SUIVANT
           </button>
         </div>
